@@ -8,7 +8,7 @@ public class game2manager : MonoBehaviour
     public float score;
     public GameObject scoreboard;
     public TMP_Text scorecounter;
-
+    public TMP_Text dificuiltycounter;
     public float dificuilty;
     private bool stop;
     public float maxdificuilty;
@@ -36,7 +36,8 @@ public class game2manager : MonoBehaviour
         {
             dificuilty = 7;
         }
-        scorecounter.text = score.ToString(); 
+        scorecounter.text = score.ToString();
+        dificuiltycounter.text = dificuilty.ToString();
     }
     public void start()
     {
