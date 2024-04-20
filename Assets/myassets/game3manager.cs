@@ -49,7 +49,7 @@ public class game3manager : MonoBehaviour
         Resetcounter();
         stopgame();
         current = 0;
-        numberofenemies = dificuilty * 2;
+        numberofenemies = (dificuilty * 2) + 10;
         StartCoroutine(waitforspawn(5 / dificuilty));
 
 
@@ -82,12 +82,13 @@ public class game3manager : MonoBehaviour
     private IEnumerator waitforspawn(float waittime)
     {
 
-        yield return new WaitForSeconds(5 / dificuilty);
+        
         current += 1;
         if (current < numberofenemies + 1)
         {
             Instantiate(targetdummy);
             targetdummy.transform.position = new Vector3(Random.Range(10, 20), Random.Range(0, 5), Random.Range(-3, -7));
+            yield return new WaitForSeconds(5 / dificuilty);
             StartCoroutine(waitforspawn(5 / dificuilty));
         }
     }

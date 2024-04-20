@@ -8,13 +8,16 @@ public class firebullet : MonoBehaviour
     public GameObject bulletprefab;
     public Transform bulletspawn;
     public float firespeed = 20;
-    public GameObject light;
+    AudioSource bulletsource;
+    public AudioClip noise;
+    public ParticleSystem particles;
+    
     // Start is called before the first frame update
     void Start()
     {
         XRGrabInteractable grab = GetComponent<XRGrabInteractable>();
         grab.activated.AddListener(shoot);
-        grab.activated.AddListener(getridoflight);
+       bulletsource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -24,13 +27,12 @@ public class firebullet : MonoBehaviour
     }
     public void shoot(ActivateEventArgs arg)
     {
+        particles.Play();
+        bulletsource.PlayOneShot(noise);
         GameObject bullet = Instantiate(bulletprefab);
         bullet.transform.position = bulletspawn.position;
         bullet.GetComponent<Rigidbody>().velocity = bulletspawn.forward * firespeed;
         Destroy(bullet, 5);
     }
-    public void getridoflight(ActivateEventArgs arg)
-    {
-        light.SetActive(false);
-    }
+    
 }

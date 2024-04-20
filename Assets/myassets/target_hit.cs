@@ -22,6 +22,7 @@ public class target_hit : MonoBehaviour
         GameObject hitmarker = Instantiate(hitparticle);
         hitmarker.transform.position = collision.transform.position;
         Destroy(hitmarker,10f);
+        Destroy(collision.gameObject);
 
     }
 }

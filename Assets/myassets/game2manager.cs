@@ -49,7 +49,7 @@ public class game2manager : MonoBehaviour
         Resetcounter();
         stopgame();
         current = 0;
-        numberofenemies = dificuilty * 2;
+        numberofenemies = (dificuilty * 2) + 10;
         StartCoroutine(waitforspawn(5/dificuilty));
         
 
