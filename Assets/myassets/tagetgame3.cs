@@ -11,6 +11,7 @@ public class targetgame3 : MonoBehaviour
     {
         gamemanager = GameObject.Find("Game3 manager");
         dificuilty = gamemanager.GetComponent<game3manager>().dificuilty;
+        Destroy(gameObject, 5/dificuilty);
         
     }
 

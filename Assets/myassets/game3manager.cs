@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class game3manager : MonoBehaviour
 {
@@ -14,7 +15,8 @@ public class game3manager : MonoBehaviour
     public float maxdificuilty;
     public GameObject targetdummy;
     public float numberofenemies = 10;
-
+    private bool started;
+    public GameObject startbutton;
     private float current;
 
     // Start is called before the first frame update
@@ -36,18 +38,32 @@ public class game3manager : MonoBehaviour
         {
             dificuilty = 7;
         }
+        if (started)
+        {
+            startbutton.GetComponent<Image>().color = Color.blue;
+        }
+        else
+        {
+            startbutton.GetComponent<Image>().color = Color.gray;
+        }
         scorecounter.text = score.ToString();
         dificuiltycounter.text = dificuilty.ToString();
     }
     public void start()
     {
-        spawntargetdummy();
+        if (!started) 
+        {
+            spawntargetdummy();
+            started = true;
+        }
+        
     }
 
     private void spawntargetdummy()
     {
-        Resetcounter();
+        
         stopgame();
+        Resetcounter();
         current = 0;
         numberofenemies = (dificuilty * 2) + 10;
         StartCoroutine(waitforspawn(5 / dificuilty));
@@ -84,12 +100,17 @@ public class game3manager : MonoBehaviour
 
         
         current += 1;
-        if (current < numberofenemies + 1)
+        if (current < numberofenemies + 1 && !stop)
         {
             Instantiate(targetdummy);
             targetdummy.transform.position = new Vector3(Random.Range(10, 20), Random.Range(0, 5), Random.Range(-3, -7));
             yield return new WaitForSeconds(5 / dificuilty);
             StartCoroutine(waitforspawn(5 / dificuilty));
+        }
+        else
+        {
+            started = false;
+            current = 0;
         }
     }
 }
